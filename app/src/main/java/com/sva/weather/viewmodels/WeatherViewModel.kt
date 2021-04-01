@@ -79,26 +79,27 @@ class WeatherViewModel : ViewModel() {
     }
 
     fun getNearestCitiesWeather(location: Location) {
-        state.post(WeatherState.StartLoadingState())
+        if(cityData.value!=null){
+            state.post(WeatherState.StartLoadingState())
 
-        val lat = location.latitude
-        val lng = location.longitude
+            val lat = location.latitude
+            val lng = location.longitude
 
-        val cityDistanceList = arrayListOf<Int>()
-        for (city in cityData.value!!) {
-            val result: FloatArray = FloatArray(1)
-            Location.distanceBetween(lat, lng, city.lat!!.toDouble(), city.lng!!.toDouble(), result)
-            cityDistanceList.add(result[0].toInt())
+            val cityDistanceList = arrayListOf<Int>()
+            for (city in cityData.value!!) {
+                val result: FloatArray = FloatArray(1)
+                Location.distanceBetween(lat, lng, city.lat!!.toDouble(), city.lng!!.toDouble(), result)
+                cityDistanceList.add(result[0].toInt())
+            }
+            var nearestCitiesList = ArrayList<Int>(cityDistanceList)
+            nearestCitiesList = nearestCitiesList.distinct() as ArrayList<Int>
+            nearestCitiesList.sort()
+            nearestCitiesList = nearestCitiesList.take(5) as ArrayList<Int>
+            val resultCities = arrayListOf<CityPositionModel>()
+            for (x in 0..4) {
+                resultCities.add(cityData.value!![cityDistanceList.indexOf(nearestCitiesList[x])])
+            }
+            getWeatherData(resultCities)
         }
-        var nearestCitiesList = ArrayList<Int>(cityDistanceList)
-        nearestCitiesList = nearestCitiesList.distinct() as ArrayList<Int>
-        nearestCitiesList.sort()
-        nearestCitiesList = nearestCitiesList.take(5) as ArrayList<Int>
-        val resultCities = arrayListOf<CityPositionModel>()
-        for (x in 0..4) {
-            resultCities.add(cityData.value!![cityDistanceList.indexOf(nearestCitiesList[x])])
-        }
-
-        getWeatherData(resultCities)
     }
 }
