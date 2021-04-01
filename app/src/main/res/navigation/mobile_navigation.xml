@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_weather">
+
+    <fragment
+        android:id="@+id/navigation_weather"
+        android:name="com.sva.weather.ui.fragment.WeatherFragment"
+        android:label="@string/title_weather"
+        tools:layout="@layout/fragment_weather" >
+        <action
+            android:id="@+id/action_navigation_weather_to_navigation_daily_weather"
+            app:destination="@id/navigation_daily_weather" >
+            <argument
+                android:name="weatherData"
+                app:argType="com.sva.weather.model.CityWeatherModel"/>
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_fav"
+        android:name="com.sva.weather.ui.fragment.FavFragment"
+        android:label="@string/title_favourites"
+        tools:layout="@layout/fragment_fav" >
+        <action
+            android:id="@+id/action_navigation_fav_to_navigation_daily_weather"
+            app:destination="@id/navigation_daily_weather" >
+            <argument
+                android:name="weatherData"
+                app:argType="com.sva.weather.model.CityWeatherModel"/>
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_daily_weather"
+        android:name="com.sva.weather.ui.fragment.DailyWeatherFragment"
+        android:label="@string/title_daily"
+        tools:layout="@layout/fragment_daily_weather"/>
+</navigation>

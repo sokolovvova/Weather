@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="data"
+            type="com.sva.weather.model.DailyWeatherConvertedModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:padding="5dp">
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/blue"
+            android:gravity="start|center_vertical"
+            android:paddingStart="15dp"
+            android:text="@{data.time}"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@id/temperature"
+            app:layout_constraintEnd_toStartOf="@id/weather_img"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/temperature"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/blue"
+            android:gravity="start|center_vertical"
+            android:paddingStart="15dp"
+            android:text="@{data.temp}"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/weather_img"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/time" />
+
+        <ImageView
+            android:id="@+id/weather_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:background="@color/blue"
+            android:src="@drawable/ic_test"
+            app:imageDrawable="@{data.img}"
+            app:layout_constraintBottom_toTopOf="@id/weather_description"
+            app:layout_constraintEnd_toStartOf="@id/wing_speed"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintStart_toEndOf="@id/time"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_weight="2" />
+
+        <TextView
+            android:id="@+id/weather_description"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/blue"
+            android:gravity="center"
+            android:text="@{data.description}"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/weather_img"
+            app:layout_constraintStart_toStartOf="@id/weather_img"
+            app:layout_constraintTop_toBottomOf="@id/weather_img"
+            app:layout_constraintVertical_weight="1" />
+
+        <TextView
+            android:id="@+id/wing_speed"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/blue"
+            android:gravity="start|center_vertical"
+            android:paddingStart="15dp"
+            android:text="@{data.wingSpeed}"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toTopOf="@id/pressure"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintStart_toEndOf="@id/weather_img"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pressure"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/blue"
+            android:gravity="start|center_vertical"
+            android:paddingStart="15dp"
+            android:text="@{data.pressure}"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/wing_speed"
+            app:layout_constraintStart_toStartOf="@id/wing_speed"
+            app:layout_constraintTop_toBottomOf="@id/wing_speed" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
